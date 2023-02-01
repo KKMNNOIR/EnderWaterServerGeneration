@@ -1,0 +1,18 @@
+{
+    "display": {
+        "title": "EnderwaterServer",
+        "description": "国家鯖󠄀用、worldgen方面",
+        "icon": {
+            "item": "minecraft:player_head",
+            "nbt": "{SkullOwner: 'KKMNNOIR'}"
+        },
+        "show_toast": false,
+        "announce_to_chat": false
+    },
+    "parent": "global:root",
+    "criteria": {
+        "trigger": {
+            "trigger": "minecraft:tick"
+        }
+    }
+}
