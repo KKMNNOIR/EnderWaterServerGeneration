@@ -19,7 +19,7 @@
       }
     },
     "natural": true,
-    "piglin_safe": false,
+    "piglin_safe": true, // ピグリンちゃん生存フラグ
     "respawn_anchor_works": false,
     "ultrawarm": false
   }
