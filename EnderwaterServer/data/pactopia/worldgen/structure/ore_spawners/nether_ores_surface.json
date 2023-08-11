@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:jigsaw",
+    "biomes": "#minecraft:is_nether",
+    "size": 7,
+    "max_distance_from_center": 80,
+    "start_height": {
+        "absolute": -10
+    },
+    "step": "underground_ores",
+    "spawn_overrides": {},
+    "terrain_adaptation": "beard_box",
+    "use_expansion_hack": false,
+    "start_pool": "pactopia:nether_ore_spawners",
+    "project_start_to_heightmap": "OCEAN_FLOOR_WG"
+}

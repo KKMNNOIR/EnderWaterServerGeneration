@@ -1,0 +1,95 @@
+{
+    "structures": [
+        {
+            "weight": 1,
+            "structure": "pactopia:ore_spawners/calcite"
+        },
+        {
+            "weight": 1,
+            "structure": "pactopia:ore_spawners/coal_ore"
+        },
+        {
+            "weight": 1,
+            "structure": "pactopia:ore_spawners/debris"
+        },
+        {
+            "weight": 1,
+            "structure": "pactopia:ore_spawners/debris_surface"
+        },
+        {
+            "weight": 1,
+            "structure": "pactopia:ore_spawners/deepslate_copper_ore"
+        },
+        {
+            "weight": 1,
+            "structure": "pactopia:ore_spawners/deepslate_diamond_ore"
+        },
+        {
+            "weight": 1,
+            "structure": "pactopia:ore_spawners/deepslate_emerald_ore"
+        },
+        {
+            "weight": 1,
+            "structure": "pactopia:ore_spawners/deepslate_gold_ore"
+        },
+        {
+            "weight": 1,
+            "structure": "pactopia:ore_spawners/deepslate_iron_ore"
+        },
+        {
+            "weight": 1,
+            "structure": "pactopia:ore_spawners/deepslate_lapis_ore"
+        },
+        {
+            "weight": 1,
+            "structure": "pactopia:ore_spawners/deepslate_redstone_ore"
+        },
+        {
+            "weight": 1,
+            "structure": "pactopia:ore_spawners/diamond_ore"
+        },
+        {
+            "weight": 1,
+            "structure": "pactopia:ore_spawners/emerald_ore"
+        },
+        {
+            "weight": 1,
+            "structure": "pactopia:ore_spawners/gold_ore"
+        },
+        {
+            "weight": 1,
+            "structure": "pactopia:ore_spawners/iron_ore"
+        },
+        {
+            "weight": 1,
+            "structure": "pactopia:ore_spawners/lapis_ore"
+        },
+        {
+            "weight": 1,
+            "structure": "pactopia:ore_spawners/nether_ores"
+        },
+        {
+            "weight": 1,
+            "structure": "pactopia:ore_spawners/nether_ores_surface"
+        },
+        {
+            "weight": 1,
+            "structure": "pactopia:ore_spawners/redstone_ore"
+        },
+        {
+            "weight": 1,
+            "structure": "pactopia:ore_spawners/stone_variants"
+        },
+        {
+            "weight": 1,
+            "structure": "pactopia:ore_spawners/tuff"
+        }
+    ],
+    "placement": {
+        "type": "minecraft:random_spread",
+        "salt": 1825622736,
+        "frequency": 0.1,
+        "spacing": 4,
+        "separation": 2
+    }
+}

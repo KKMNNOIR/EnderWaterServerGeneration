@@ -1,0 +1,14 @@
+{
+    "type": "minecraft:fossil",
+    "config": {
+        "max_empty_corners_allowed": 4,
+        "fossil_structures": [
+            "pactopia:custom_spawner_init/diamond_upper"
+        ],
+        "fossil_processors": "minecraft:empty",
+        "overlay_structures": [
+            "pactopia:custom_spawner_init/overlay"
+        ],
+        "overlay_processors": "minecraft:empty"
+    }
+}

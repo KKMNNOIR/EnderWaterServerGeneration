@@ -24,13 +24,25 @@
       "xz_scale": 1.0,
       "y_scale": 0.5
     },
-    "continents": "minecraft:overworld/continents",
+    "continents": "pactopia:overworld/continents",
     "depth": "minecraft:overworld/depth",
-    "erosion": "minecraft:overworld/erosion",
+    "erosion": {
+      "type": "minecraft:range_choice",
+      "input": "minecraft:y",
+      "max_exclusive": 300,
+      "min_inclusive": -64,
+      "when_in_range": "pactopia:overworld/erosion",
+      "when_out_of_range": {
+        "type": "minecraft:cache_2d",
+        "argument": {
+          "type": "minecraft:end_islands"
+        }
+      }
+    },
     "final_density": {
       "type": "minecraft:range_choice",
       "input": "minecraft:y",
-      "min_inclusive": 768,
+      "min_inclusive": 300,
       "max_exclusive": 1025,
       "when_in_range": {
         "type": "minecraft:squeeze",
@@ -45,33 +57,37 @@
                 "type": "minecraft:add",
                 "argument1": -0.234375,
                 "argument2": {
-                  "type": "minecraft:mul",
-                  "argument1": {
-                    "type": "minecraft:y_clamped_gradient",
-                    "from_value": 0.0,
-                    "from_y": 772,
-                    "to_value": 1.0,
-                    "to_y": 800
-                  },
+                  "type": "minecraft:add",
+                  "argument1": "pactopia:floating_continents_modifier",
                   "argument2": {
-                    "type": "minecraft:add",
-                    "argument1": 0.234375,
+                    "type": "minecraft:mul",
+                    "argument1": { 
+                      "type": "minecraft:y_clamped_gradient",
+                      "from_value": 0.0,
+                      "from_y": 304,
+                      "to_value": 1.0,
+                      "to_y": 332
+                    },
                     "argument2": {
                       "type": "minecraft:add",
-                      "argument1": -23.4375,
+                      "argument1": 0.234375,
                       "argument2": {
-                        "type": "minecraft:mul",
-                        "argument1": {
-                          "type": "minecraft:y_clamped_gradient",
-                          "from_value": 1.0,
-                          "from_y": 824,
-                          "to_value": 0.0,
-                          "to_y": 1080
-                        },
+                        "type": "minecraft:add",
+                        "argument1": -23.4375,
                         "argument2": {
-                          "type": "minecraft:add",
-                          "argument1": 23.4375,
-                          "argument2": "minecraft:end/sloped_cheese"
+                          "type": "minecraft:mul",
+                          "argument1": {
+                            "type": "minecraft:y_clamped_gradient",
+                            "from_value": 1.0,
+                            "from_y": 356,
+                            "to_value": 0.0,
+                            "to_y": 612
+                          },
+                          "argument2": {
+                            "type": "minecraft:add",
+                            "argument1": 23.4375,
+                            "argument2": "minecraft:end/sloped_cheese"
+                          }
                         }
                       }
                     }
@@ -235,110 +251,58 @@
       "y_scale": 0.7142857142857143
     },
     "initial_density_without_jaggedness": {
-      "type": "minecraft:range_choice",
-      "input": "minecraft:y",
-      "min_inclusive": 768,
-      "max_exclusive": 1025,
-      "when_out_of_range": {
-        "type": "minecraft:add",
-        "argument1": 0.1171875,
+      "type": "minecraft:add",
+      "argument1": 0.1171875,
+      "argument2": {
+        "type": "minecraft:mul",
+        "argument1": {
+          "type": "minecraft:y_clamped_gradient",
+          "from_value": 0.0,
+          "from_y": -64,
+          "to_value": 1.0,
+          "to_y": -40
+        },
         "argument2": {
-          "type": "minecraft:mul",
-          "argument1": {
-            "type": "minecraft:y_clamped_gradient",
-            "from_value": 0.0,
-            "from_y": -64,
-            "to_value": 1.0,
-            "to_y": -40
-          },
+          "type": "minecraft:add",
+          "argument1": -0.1171875,
           "argument2": {
             "type": "minecraft:add",
-            "argument1": -0.1171875,
+            "argument1": -0.078125,
             "argument2": {
-              "type": "minecraft:add",
-              "argument1": -0.078125,
+              "type": "minecraft:mul",
+              "argument1": {
+                "type": "minecraft:y_clamped_gradient",
+                "from_value": 1.0,
+                "from_y": 240,
+                "to_value": 0.0,
+                "to_y": 256
+              },
               "argument2": {
-                "type": "minecraft:mul",
-                "argument1": {
-                  "type": "minecraft:y_clamped_gradient",
-                  "from_value": 1.0,
-                  "from_y": 240,
-                  "to_value": 0.0,
-                  "to_y": 256
-                },
+                "type": "minecraft:add",
+                "argument1": 0.078125,
                 "argument2": {
-                  "type": "minecraft:add",
-                  "argument1": 0.078125,
-                  "argument2": {
-                    "type": "minecraft:clamp",
-                    "input": {
-                      "type": "minecraft:add",
-                      "argument1": -0.703125,
-                      "argument2": {
-                        "type": "minecraft:mul",
-                        "argument1": 4.0,
-                        "argument2": {
-                          "type": "minecraft:quarter_negative",
-                          "argument": {
-                            "type": "minecraft:mul",
-                            "argument1": "minecraft:overworld/depth",
-                            "argument2": {
-                              "type": "minecraft:cache_2d",
-                              "argument": "minecraft:overworld/factor"
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "max": 64.0,
-                    "min": -64.0
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "when_in_range": {
-        "type": "minecraft:add",
-        "argument1": -0.234375,
-        "argument2": {
-          "type": "minecraft:mul",
-          "argument1": {
-            "type": "minecraft:y_clamped_gradient",
-            "from_value": 0.0,
-            "from_y": 4,
-            "to_value": 1.0,
-            "to_y": 32
-          },
-          "argument2": {
-            "type": "minecraft:add",
-            "argument1": 0.234375,
-            "argument2": {
-              "type": "minecraft:add",
-              "argument1": -23.4375,
-              "argument2": {
-                "type": "minecraft:mul",
-                "argument1": {
-                  "type": "minecraft:y_clamped_gradient",
-                  "from_value": 1.0,
-                  "from_y": 56,
-                  "to_value": 0.0,
-                  "to_y": 312
-                },
-                "argument2": {
-                  "type": "minecraft:add",
-                  "argument1": 23.4375,
-                  "argument2": {
+                  "type": "minecraft:clamp",
+                  "input": {
                     "type": "minecraft:add",
                     "argument1": -0.703125,
                     "argument2": {
-                      "type": "minecraft:cache_2d",
-                      "argument": {
-                        "type": "minecraft:end_islands"
+                      "type": "minecraft:mul",
+                      "argument1": 4.0,
+                      "argument2": {
+                        "type": "minecraft:quarter_negative",
+                        "argument": {
+                          "type": "minecraft:mul",
+                          "argument1": "minecraft:overworld/depth",
+                          "argument2": {
+                            "type": "minecraft:cache_2d",
+                            "argument": "minecraft:overworld/factor"
+                          }
+                        }
                       }
                     }
-                  }
+                  },
+                  "max": 64.0,
+                  "min": -64.0
                 }
               }
             }
@@ -352,19 +316,11 @@
       "xz_scale": 1.0,
       "y_scale": 1.0
     },
-    "ridges": "minecraft:overworld/ridges",
-    "temperature": {
-      "type": "minecraft:shifted_noise",
-      "noise": "minecraft:temperature",
-      "shift_x": "minecraft:shift_x",
-      "shift_y": 0.0,
-      "shift_z": "minecraft:shift_z",
-      "xz_scale": 0.25,
-      "y_scale": 0.0
-    },
+    "ridges": "pactopia:overworld/ridges",
+    "temperature": "pactopia:temperature",
     "vegetation": {
       "type": "minecraft:shifted_noise",
-      "noise": "minecraft:vegetation",
+      "noise": "pactopia:vegetation",
       "shift_x": "minecraft:shift_x",
       "shift_y": 0.0,
       "shift_z": "minecraft:shift_z",
@@ -439,7 +395,7 @@
       }
     }
   },
-  "ore_veins_enabled": true,
+  "ore_veins_enabled": false,
   "sea_level": 63,
   "spawn_target": [
     {
@@ -511,6 +467,666 @@
           "result_state": {
             "Name": "minecraft:bedrock"
           }
+        }
+      },
+      {
+        "type": "minecraft:sequence",
+        "sequence": [
+          {
+            "type": "minecraft:condition",
+            "if_true": {
+              "type": "minecraft:y_above",
+              "add_stone_depth": false,
+              "anchor": {
+                "below_top": 5
+              },
+              "surface_depth_multiplier": 0
+            },
+            "then_run": {
+              "type": "minecraft:condition",
+              "if_true": {
+                "type": "minecraft:biome",
+                "biome_is": [
+                  "minecraft:basalt_deltas",
+                  "minecraft:crimson_forest",
+                  "minecraft:nether_wastes",
+                  "minecraft:warped_forest",
+                  "minecraft:soul_sand_valley"
+                ]
+              },
+              "then_run": {
+                "type": "minecraft:block",
+                "result_state": {
+                  "Name": "minecraft:netherrack"
+                }
+              }
+            }
+          },
+          {
+            "type": "minecraft:condition",
+            "if_true": {
+              "type": "minecraft:biome",
+              "biome_is": [
+                "minecraft:basalt_deltas"
+              ]
+            },
+            "then_run": {
+              "type": "minecraft:sequence",
+              "sequence": [
+                {
+                  "type": "minecraft:condition",
+                  "if_true": {
+                    "type": "minecraft:stone_depth",
+                    "add_surface_depth": true,
+                    "offset": 0,
+                    "secondary_depth_range": 0,
+                    "surface_type": "ceiling"
+                  },
+                  "then_run": {
+                    "type": "minecraft:block",
+                    "result_state": {
+                      "Name": "minecraft:basalt",
+                      "Properties": {
+                        "axis": "y"
+                      }
+                    }
+                  }
+                },
+                {
+                  "type": "minecraft:condition",
+                  "if_true": {
+                    "type": "minecraft:stone_depth",
+                    "add_surface_depth": true,
+                    "offset": 0,
+                    "secondary_depth_range": 0,
+                    "surface_type": "floor"
+                  },
+                  "then_run": {
+                    "type": "minecraft:sequence",
+                    "sequence": [
+                      {
+                        "type": "minecraft:condition",
+                        "if_true": {
+                          "type": "minecraft:noise_threshold",
+                          "max_threshold": 1.7976931348623157E308,
+                          "min_threshold": -0.012,
+                          "noise": "minecraft:patch"
+                        },
+                        "then_run": {
+                          "type": "minecraft:condition",
+                          "if_true": {
+                            "type": "minecraft:y_above",
+                            "add_stone_depth": true,
+                            "anchor": {
+                              "absolute": 30
+                            },
+                            "surface_depth_multiplier": 0
+                          },
+                          "then_run": {
+                            "type": "minecraft:condition",
+                            "if_true": {
+                              "type": "minecraft:not",
+                              "invert": {
+                                "type": "minecraft:y_above",
+                                "add_stone_depth": true,
+                                "anchor": {
+                                  "absolute": 35
+                                },
+                                "surface_depth_multiplier": 0
+                              }
+                            },
+                            "then_run": {
+                              "type": "minecraft:block",
+                              "result_state": {
+                                "Name": "minecraft:gravel"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "type": "minecraft:condition",
+                        "if_true": {
+                          "type": "minecraft:noise_threshold",
+                          "max_threshold": 1.7976931348623157E308,
+                          "min_threshold": 0.0,
+                          "noise": "minecraft:nether_state_selector"
+                        },
+                        "then_run": {
+                          "type": "minecraft:block",
+                          "result_state": {
+                            "Name": "minecraft:basalt",
+                            "Properties": {
+                              "axis": "y"
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "type": "minecraft:block",
+                        "result_state": {
+                          "Name": "minecraft:blackstone"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "minecraft:condition",
+            "if_true": {
+              "type": "minecraft:biome",
+              "biome_is": [
+                "minecraft:soul_sand_valley"
+              ]
+            },
+            "then_run": {
+              "type": "minecraft:sequence",
+              "sequence": [
+                {
+                  "type": "minecraft:condition",
+                  "if_true": {
+                    "type": "minecraft:stone_depth",
+                    "add_surface_depth": true,
+                    "offset": 0,
+                    "secondary_depth_range": 0,
+                    "surface_type": "ceiling"
+                  },
+                  "then_run": {
+                    "type": "minecraft:sequence",
+                    "sequence": [
+                      {
+                        "type": "minecraft:condition",
+                        "if_true": {
+                          "type": "minecraft:noise_threshold",
+                          "max_threshold": 1.7976931348623157E308,
+                          "min_threshold": 0.0,
+                          "noise": "minecraft:nether_state_selector"
+                        },
+                        "then_run": {
+                          "type": "minecraft:block",
+                          "result_state": {
+                            "Name": "minecraft:soul_sand"
+                          }
+                        }
+                      },
+                      {
+                        "type": "minecraft:block",
+                        "result_state": {
+                          "Name": "minecraft:soul_soil"
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "minecraft:condition",
+                  "if_true": {
+                    "type": "minecraft:stone_depth",
+                    "add_surface_depth": true,
+                    "offset": 0,
+                    "secondary_depth_range": 0,
+                    "surface_type": "floor"
+                  },
+                  "then_run": {
+                    "type": "minecraft:sequence",
+                    "sequence": [
+                      {
+                        "type": "minecraft:condition",
+                        "if_true": {
+                          "type": "minecraft:noise_threshold",
+                          "max_threshold": 1.7976931348623157E308,
+                          "min_threshold": -0.012,
+                          "noise": "minecraft:patch"
+                        },
+                        "then_run": {
+                          "type": "minecraft:condition",
+                          "if_true": {
+                            "type": "minecraft:y_above",
+                            "add_stone_depth": true,
+                            "anchor": {
+                              "absolute": 30
+                            },
+                            "surface_depth_multiplier": 0
+                          },
+                          "then_run": {
+                            "type": "minecraft:condition",
+                            "if_true": {
+                              "type": "minecraft:not",
+                              "invert": {
+                                "type": "minecraft:y_above",
+                                "add_stone_depth": true,
+                                "anchor": {
+                                  "absolute": 35
+                                },
+                                "surface_depth_multiplier": 0
+                              }
+                            },
+                            "then_run": {
+                              "type": "minecraft:block",
+                              "result_state": {
+                                "Name": "minecraft:gravel"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "type": "minecraft:condition",
+                        "if_true": {
+                          "type": "minecraft:noise_threshold",
+                          "max_threshold": 1.7976931348623157E308,
+                          "min_threshold": 0.0,
+                          "noise": "minecraft:nether_state_selector"
+                        },
+                        "then_run": {
+                          "type": "minecraft:block",
+                          "result_state": {
+                            "Name": "minecraft:soul_sand"
+                          }
+                        }
+                      },
+                      {
+                        "type": "minecraft:block",
+                        "result_state": {
+                          "Name": "minecraft:soul_soil"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "minecraft:condition",
+            "if_true": {
+              "type": "minecraft:stone_depth",
+              "add_surface_depth": false,
+              "offset": 0,
+              "secondary_depth_range": 0,
+              "surface_type": "floor"
+            },
+            "then_run": {
+              "type": "minecraft:sequence",
+              "sequence": [
+                {
+                  "type": "minecraft:condition",
+                  "if_true": {
+                    "type": "minecraft:not",
+                    "invert": {
+                      "type": "minecraft:y_above",
+                      "add_stone_depth": false,
+                      "anchor": {
+                        "absolute": 32
+                      },
+                      "surface_depth_multiplier": 0
+                    }
+                  },
+                  "then_run": {
+                    "type": "minecraft:condition",
+                    "if_true": {
+                      "type": "minecraft:hole"
+                    },
+                    "then_run": {
+                      "type": "minecraft:block",
+                      "result_state": {
+                        "Name": "minecraft:lava",
+                        "Properties": {
+                          "level": "0"
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "type": "minecraft:condition",
+                  "if_true": {
+                    "type": "minecraft:biome",
+                    "biome_is": [
+                      "minecraft:warped_forest"
+                    ]
+                  },
+                  "then_run": {
+                    "type": "minecraft:condition",
+                    "if_true": {
+                      "type": "minecraft:not",
+                      "invert": {
+                        "type": "minecraft:noise_threshold",
+                        "max_threshold": 1.7976931348623157E308,
+                        "min_threshold": 0.54,
+                        "noise": "minecraft:netherrack"
+                      }
+                    },
+                    "then_run": {
+                      "type": "minecraft:condition",
+                      "if_true": {
+                        "type": "minecraft:y_above",
+                        "add_stone_depth": false,
+                        "anchor": {
+                          "absolute": 31
+                        },
+                        "surface_depth_multiplier": 0
+                      },
+                      "then_run": {
+                        "type": "minecraft:sequence",
+                        "sequence": [
+                          {
+                            "type": "minecraft:condition",
+                            "if_true": {
+                              "type": "minecraft:noise_threshold",
+                              "max_threshold": 1.7976931348623157E308,
+                              "min_threshold": 1.17,
+                              "noise": "minecraft:nether_wart"
+                            },
+                            "then_run": {
+                              "type": "minecraft:block",
+                              "result_state": {
+                                "Name": "minecraft:warped_wart_block"
+                              }
+                            }
+                          },
+                          {
+                            "type": "minecraft:condition",
+                            "if_true": {
+                              "type": "minecraft:above_preliminary_surface"
+                            },
+                            "then_run": {
+                              "type": "minecraft:block",
+                              "result_state": {
+                                "Name": "minecraft:warped_nylium"
+                              }
+                            }
+                          },
+                          {
+                            "type": "minecraft:block",
+                            "result_state": {
+                              "Name": "minecraft:netherrack"
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                },
+                {
+                  "type": "minecraft:condition",
+                  "if_true": {
+                    "type": "minecraft:biome",
+                    "biome_is": [
+                      "minecraft:crimson_forest"
+                    ]
+                  },
+                  "then_run": {
+                    "type": "minecraft:condition",
+                    "if_true": {
+                      "type": "minecraft:not",
+                      "invert": {
+                        "type": "minecraft:noise_threshold",
+                        "max_threshold": 1.7976931348623157E308,
+                        "min_threshold": 0.54,
+                        "noise": "minecraft:netherrack"
+                      }
+                    },
+                    "then_run": {
+                      "type": "minecraft:condition",
+                      "if_true": {
+                        "type": "minecraft:y_above",
+                        "add_stone_depth": false,
+                        "anchor": {
+                          "absolute": 31
+                        },
+                        "surface_depth_multiplier": 0
+                      },
+                      "then_run": {
+                        "type": "minecraft:sequence",
+                        "sequence": [
+                          {
+                            "type": "minecraft:condition",
+                            "if_true": {
+                              "type": "minecraft:noise_threshold",
+                              "max_threshold": 1.7976931348623157E308,
+                              "min_threshold": 1.17,
+                              "noise": "minecraft:nether_wart"
+                            },
+                            "then_run": {
+                              "type": "minecraft:block",
+                              "result_state": {
+                                "Name": "minecraft:nether_wart_block"
+                              }
+                            }
+                          },
+                          {
+                            "type": "minecraft:condition",
+                            "if_true": {
+                              "type": "minecraft:above_preliminary_surface"
+                            },
+                            "then_run": {
+                              "type": "minecraft:block",
+                              "result_state": {
+                                "Name": "minecraft:crimson_nylium"
+                              }
+                            }
+                          },
+                          {
+                            "type": "minecraft:block",
+                            "result_state": {
+                              "Name": "minecraft:netherrack"
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "minecraft:condition",
+            "if_true": {
+              "type": "minecraft:biome",
+              "biome_is": [
+                "minecraft:nether_wastes"
+              ]
+            },
+            "then_run": {
+              "type": "minecraft:sequence",
+              "sequence": [
+                {
+                  "type": "minecraft:condition",
+                  "if_true": {
+                    "type": "minecraft:stone_depth",
+                    "add_surface_depth": true,
+                    "offset": 0,
+                    "secondary_depth_range": 0,
+                    "surface_type": "floor"
+                  },
+                  "then_run": {
+                    "type": "minecraft:condition",
+                    "if_true": {
+                      "type": "minecraft:noise_threshold",
+                      "max_threshold": 1.7976931348623157E308,
+                      "min_threshold": -0.012,
+                      "noise": "minecraft:soul_sand_layer"
+                    },
+                    "then_run": {
+                      "type": "minecraft:sequence",
+                      "sequence": [
+                        {
+                          "type": "minecraft:condition",
+                          "if_true": {
+                            "type": "minecraft:not",
+                            "invert": {
+                              "type": "minecraft:hole"
+                            }
+                          },
+                          "then_run": {
+                            "type": "minecraft:condition",
+                            "if_true": {
+                              "type": "minecraft:y_above",
+                              "add_stone_depth": true,
+                              "anchor": {
+                                "absolute": 30
+                              },
+                              "surface_depth_multiplier": 0
+                            },
+                            "then_run": {
+                              "type": "minecraft:condition",
+                              "if_true": {
+                                "type": "minecraft:not",
+                                "invert": {
+                                  "type": "minecraft:y_above",
+                                  "add_stone_depth": true,
+                                  "anchor": {
+                                    "absolute": 35
+                                  },
+                                  "surface_depth_multiplier": 0
+                                }
+                              },
+                              "then_run": {
+                                "type": "minecraft:block",
+                                "result_state": {
+                                  "Name": "minecraft:soul_sand"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "type": "minecraft:block",
+                          "result_state": {
+                            "Name": "minecraft:netherrack"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "type": "minecraft:condition",
+                  "if_true": {
+                    "type": "minecraft:stone_depth",
+                    "add_surface_depth": false,
+                    "offset": 0,
+                    "secondary_depth_range": 0,
+                    "surface_type": "floor"
+                  },
+                  "then_run": {
+                    "type": "minecraft:condition",
+                    "if_true": {
+                      "type": "minecraft:y_above",
+                      "add_stone_depth": false,
+                      "anchor": {
+                        "absolute": 31
+                      },
+                      "surface_depth_multiplier": 0
+                    },
+                    "then_run": {
+                      "type": "minecraft:condition",
+                      "if_true": {
+                        "type": "minecraft:not",
+                        "invert": {
+                          "type": "minecraft:y_above",
+                          "add_stone_depth": true,
+                          "anchor": {
+                            "absolute": 35
+                          },
+                          "surface_depth_multiplier": 0
+                        }
+                      },
+                      "then_run": {
+                        "type": "minecraft:condition",
+                        "if_true": {
+                          "type": "minecraft:noise_threshold",
+                          "max_threshold": 1.7976931348623157E308,
+                          "min_threshold": -0.012,
+                          "noise": "minecraft:gravel_layer"
+                        },
+                        "then_run": {
+                          "type": "minecraft:sequence",
+                          "sequence": [
+                            {
+                              "type": "minecraft:condition",
+                              "if_true": {
+                                "type": "minecraft:y_above",
+                                "add_stone_depth": false,
+                                "anchor": {
+                                  "absolute": 32
+                                },
+                                "surface_depth_multiplier": 0
+                              },
+                              "then_run": {
+                                "type": "minecraft:block",
+                                "result_state": {
+                                  "Name": "minecraft:gravel"
+                                }
+                              }
+                            },
+                            {
+                              "type": "minecraft:condition",
+                              "if_true": {
+                                "type": "minecraft:not",
+                                "invert": {
+                                  "type": "minecraft:hole"
+                                }
+                              },
+                              "then_run": {
+                                "type": "minecraft:block",
+                                "result_state": {
+                                  "Name": "minecraft:gravel"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "minecraft:condition",
+            "if_true": {
+                "type": "minecraft:biome",
+                "biome_is": [
+                  "minecraft:nether_wastes",
+                  "minecraft:crimson_forest",
+                  "minecraft:basalt_deltas",
+                  "minecraft:soul_sand_valley",
+                  "minecraft:warped_forest"
+                ]
+            },
+            "then_run": {
+                "type": "minecraft:block",
+                "result_state": {
+                    "Name": "minecraft:netherrack"
+                }
+            }
+          }
+        ]
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+            "type": "minecraft:biome",
+            "biome_is": [
+              "minecraft:the_end",
+              "minecraft:small_end_islands",
+              "minecraft:end_barrens",
+              "minecraft:end_midlands",
+              "minecraft:end_highlands"
+            ]
+        },
+        "then_run": {
+            "type": "minecraft:block",
+            "result_state": {
+                "Name": "minecraft:end_stone"
+            }
         }
       },
       {
@@ -2742,47 +3358,6 @@
       {
         "type": "minecraft:condition",
         "if_true": {
-            "type": "minecraft:biome",
-            "biome_is": [
-              "minecraft:the_end",
-              "minecraft:small_end_islands",
-              "minecraft:end_barrens",
-              "minecraft:end_midlands",
-              "minecraft:end_highlands"
-            ]
-        },
-        "then_run": {
-            "type": "minecraft:block",
-            "result_state": {
-                "Name": "minecraft:end_stone"
-            }
-        }
-      },
-      {
-        "type": "minecraft:sequence",
-        "sequence": [
-          {
-            "type": "minecraft:condition",
-            "if_true": {
-                "type": "minecraft:biome",
-                "biome_is": [
-                  "minecraft:nether_wastes",
-                  "minecraft:crimson_forest",
-                  "minecraft:warped_forest"
-                ]
-            },
-            "then_run": {
-                "type": "minecraft:block",
-                "result_state": {
-                    "Name": "minecraft:netherrack"
-                }
-            }
-          }
-        ]
-      },
-      {
-        "type": "minecraft:condition",
-        "if_true": {
           "type": "minecraft:stone_depth",
           "add_surface_depth": true,
           "offset": 0,
@@ -2820,27 +3395,6 @@
                     }
                   }
                 }
-              }
-            },
-            {
-              "type": "minecraft:condition",
-              "if_true": {
-                "type": "minecraft:noise_threshold",
-                "max_threshold": 1.7976931348623157E308,
-                "min_threshold": 0.0,
-                "noise": "minecraft:nether_state_selector"
-              },
-              "then_run": {
-                "type": "minecraft:block",
-                "result_state": {
-                  "Name": "minecraft:soul_sand"
-                }
-              }
-            },
-            {
-              "type": "minecraft:block",
-              "result_state": {
-                "Name": "minecraft:soul_soil"
               }
             }
           ]
